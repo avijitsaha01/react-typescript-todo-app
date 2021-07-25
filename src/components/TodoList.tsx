@@ -1,19 +1,30 @@
 import { Checkbox} from '@material-ui/core';
 import React from 'react';
-import {v4 as uuid} from 'uuid';
+import { Todo } from '../App';
 
-const TodoList = () => {
-    const [dense, setDense] = React.useState(false);
+interface TodoListProps{
+    todos : Todo[],
+    setTodos: any
+}
+const TodoList = ({todos, setTodos}: TodoListProps) => {
 
-    
+    const todoInProgress = todos.filter((todo) => {
+        return !todo.isDone;
+    })
+
+    function updateState(todo: Todo){
+        todo.isDone = !todo.isDone;
+        todos[todo.id]  = todo;
+        setTodos([...todos])
+    }
     return (
         <div >
             <h2>Todo List</h2>
             <ul>
                 {
-                    todos.map((todo)=>{
+                    todoInProgress.map((todo)=>{
                         return(
-                            <li key={todo.id}><Checkbox checked={todo.isDone} onChange={(event) => setDense(event.target.checked)} /> {todo.description}</li>
+                            <li key={todo.id}><Checkbox onChange={(e)=>updateState(todo)} /> {todo.description}</li>
                         )
                     })
                 }

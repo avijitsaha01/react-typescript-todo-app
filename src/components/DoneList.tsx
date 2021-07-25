@@ -1,27 +1,27 @@
 import { Checkbox } from '@material-ui/core';
 import React from 'react';
-import {v4 as uuid} from 'uuid';
-const DoneList = () => {
-    const Done  = [
-        {
-            id: uuid(),
-            description: 'wasdasd',
-            isDone: true
-        },
-        {
-            id: uuid(),
-            description: 'sdfsdfsadf',
-            isDone: false
-        }
-    ]
+import { Todo } from '../App';
+
+interface DoneListProps{
+    todos : Todo[]
+}
+
+
+const DoneList = ({todos}: DoneListProps) => {
+
+    const todosDone = todos.filter((todo) => {
+        return todo.isDone;
+    })
     return (
         <div >
             <h2>Done List</h2>
             <ul>
                 {
-                    Done.map((todo)=>{
+                    todosDone.map((todo)=>{
                         return(
-                            <li key={todo.id}> {todo.description}</li>
+                            <li key={todo.id}>
+                               <Checkbox checked={true} /> 
+                            {todo.description}</li>
                         )
                     })
                 }
