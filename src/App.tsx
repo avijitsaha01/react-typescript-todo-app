@@ -29,8 +29,8 @@ export class Todo implements ITodo {
 function App() {
 
   const newTodos = [
-    new Todo('Have to Drink a cup of coffee...!!!'),
-    new Todo('Need to go Tension Mukto tea house...!')
+    new Todo('Default Task 1'),
+    new Todo('Default Task 2')
   ]
 
   const [todos, setTodos] = useState(newTodos);
